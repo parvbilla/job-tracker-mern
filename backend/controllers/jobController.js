@@ -1,0 +1,28 @@
+const Job = require("../models/Job");
+
+// Get all jobs
+exports.getJobs = async (req, res) => {
+  const jobs = await Job.find().sort({ appliedDate: -1 });
+  res.json(jobs);
+};
+
+// Add Job
+exports.addJob = async (req, res) => {
+  const job = new Job(req.body);
+  await job.save();
+  res.json(job);
+};
+
+// Delete Job
+exports.deleteJob = async (req, res) => {
+  await Job.findByIdAndDelete(req.params.id);
+  res.json({ message: "Job Removed" });
+};
+
+// Update Status
+exports.updateStatus = async (req, res) => {
+  const job = await Job.findById(req.params.id);
+  job.status = req.body.status;
+  await job.save();
+  res.json(job);
+};
