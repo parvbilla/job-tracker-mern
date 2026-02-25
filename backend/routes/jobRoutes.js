@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { createJob } = require("../controllers/jobController");
 const protect = require("../middleware/authMiddleware");
 const {
   getJobs,
