@@ -14,6 +14,7 @@ app.use(express.json());
 app.use("/api/jobs", require("./routes/jobRoutes"));
 app.use("/api/application", require("./routes/applicationRoutes"));
 app.use("/uploads", express.static("uploads"));
+app.use("/api/auth", require("./routes/authRoutes"));
 
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}`)
