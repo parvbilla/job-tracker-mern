@@ -31,9 +31,14 @@ exports.deleteJob = async (req, res) => {
 };
 
 // Update Status
-exports.updateStatus = async (req, res) => {
+exports.updateJob = async (req, res) => {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ message: "Admin only" });
+  }
+
   const job = await Job.findById(req.params.id);
   job.status = req.body.status;
   await job.save();
+
   res.json(job);
 };
